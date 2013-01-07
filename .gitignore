@@ -1,0 +1,9 @@
+/nbproject
+composer.lock
+composer.phar
+autoload.php
+/vendor/
+
+# Temporarily ignored
+index.php
+composer.json
