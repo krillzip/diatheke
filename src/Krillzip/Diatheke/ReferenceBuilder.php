@@ -12,7 +12,7 @@ namespace Krillzip\Diatheke;
  *
  * @author krillzip
  */
-class Range {
+class ReferenceBuilder {
     
     const _GENESIS = 'Gen';
     const _EXODUS = 'Exod';
@@ -99,15 +99,15 @@ class Range {
     public function reference($book, $chapter, $verse) {
 
         if (!in_array($book, $this->books)) {
-            throw new Exception\RangeException('Not valid bible book!');
+            throw new Exception\ReferenceBuilderException('Not valid bible book!');
         }
 
         if ((is_int($chapter) && $chapter > 0)) {
-            throw new Exception\RangeException('Chapter not integer or zero!');
+            throw new Exception\ReferenceBuilderException('Chapter not integer or zero!');
         }
 
         if ((is_int($verse) && $verse > 0)) {
-            throw new Exception\RangeException('Verse not integer or zero!');
+            throw new Exception\ReferenceBuilderException('Verse not integer or zero!');
         }
 
         $this->book = $name;
@@ -122,15 +122,15 @@ class Range {
     public function to($chapter, $verse) {
 
         if (!isset($this->reference)) {
-            throw new Exception\RangeException('Reference not set!');
+            throw new Exception\ReferenceBuilderException('Reference not set!');
         }
 
         if ((is_int($chapter) && $chapter > 0)) {
-            throw new Exception\RangeException('Chapter not integer or zero!');
+            throw new Exception\ReferenceBuilderException('Chapter not integer or zero!');
         }
 
         if ((is_int($verse) && $verse > 0)) {
-            throw new Exception\RangeException('Verse not integer or zero!');
+            throw new Exception\ReferenceBuilderException('Verse not integer or zero!');
         }
 
         $this->to = (object) array(

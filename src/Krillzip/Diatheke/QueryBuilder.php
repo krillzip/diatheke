@@ -23,7 +23,7 @@ class QueryBuilder {
      */
     
     const FORMAT_GBF = 'GBF';
-    const FORMAT_HTML = 'ThML';
+    const FORMAT_THML = 'ThML';
     const FORMAT_RTF = 'RTF';
     const FORMAT_HTML = 'HTML';
     const FORMAT_OSIS = 'OSIS';
@@ -119,16 +119,16 @@ class QueryBuilder {
     public function query($data) {
         $this->filterInput($data);
 
-        $this->lastOptions .= ' -k ' . $data;
+        $this->lastOption .= ' -k ' . $data;
         return $this;
     }
 
     public function __toString() {
         if(!isset($this->firstOption)){
-            throw new Exception\QueryBuilderException('Module must be set!');
+            trigger_error('Module must be set in QueryBuilder!');
         }
         if(!isset($this->lastOption)){
-            throw new Exception\QueryBuilderException('Query must be set!');
+            trigger_error('Query must be set in QueryBuilder!');
         }
         return 
                         'diatheke ' .

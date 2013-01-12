@@ -12,8 +12,8 @@ use Krillzip\Diatheke\Exception;
  *
  * @author krillzip
  */
-class RangeException extends Exception{
+class ReferenceBuilderException extends Exception{
     public function __construct($error){
-        parent::__construct('Range error: '.$error, Exception::RANGE_ERROR);
+        parent::__construct('Reference error: '.$error, Exception::REFENCE_ERROR);
     }
 }

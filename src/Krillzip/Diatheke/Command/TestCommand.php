@@ -26,6 +26,8 @@ class TestCommand extends Command {
         if ($factory->isInstalled()) {
             $output->writeln('Diatheke is installed!');
         }
+        
+        $output->write($factory->getLocales());
     }
 
 }

@@ -13,5 +13,5 @@ namespace Krillzip\Diatheke;
 class Exception extends \Exception{
     const NOT_INSTALLED = 1;
     const QUERY_BUILDER = 2;
-    const RANGE_ERROR = 3;
+    const REFERENCE_ERROR = 3;
 }
