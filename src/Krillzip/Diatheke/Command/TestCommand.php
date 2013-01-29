@@ -13,6 +13,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Krillzip\Diatheke\Diatheke;
+use Krillzip\Diatheke\Configuration;
 
 /**
  * Description of TestCommand
@@ -22,12 +23,15 @@ use Krillzip\Diatheke\Diatheke;
 class TestCommand extends Command {
 
     public function execute(InputInterface $input, OutputInterface $output) {
-        $factory = new Diatheke();
-        if ($factory->isInstalled()) {
-            $output->writeln('Diatheke is installed!');
-        }
+        $factory = new Diatheke(new Configuration(array(
+            'module' => 'SweFolk1998',
+            'output' => Diatheke::FORMAT_PLAIN,
+            'encoding' => Diatheke::ENCODING_UTF8,
+            'locale' => 'sv',
+        )));
         
-        $output->write($factory->getLocales());
+        var_dump($factory->bibleText('Ps 23'));
+        
     }
 
 }

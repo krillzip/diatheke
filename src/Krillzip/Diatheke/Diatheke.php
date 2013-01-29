@@ -13,6 +13,29 @@ namespace Krillzip\Diatheke;
  * @author krillzip
  */
 class Diatheke {
+    
+    const SEARCH_REGEX = 'regex';
+    const SEARCH_MULTIWORD = 'multiword';
+    const SEARCH_PHRASE = 'phrase';
+
+    /**
+     * @todo Option filter constants
+     */
+    const FORMAT_GBF = 'GBF';
+    const FORMAT_THML = 'ThML';
+    const FORMAT_RTF = 'RTF';
+    const FORMAT_HTML = 'HTML';
+    const FORMAT_OSIS = 'OSIS';
+    const FORMAT_CGI = 'CGI';
+    const FORMAT_PLAIN = 'plain';
+
+    const ENCODING_LATIN1 = 'Latin1';
+    const ENCODING_UTF8 = 'UTF8';
+    const ENCODING_UTF16 = 'UTF16';
+    const ENCODING_HTML = 'HTML';
+    const ENCODING_RTF = 'RTF';
+    
+    protected $config;
 
     /**
      * Remembers if the diatheke unix command is installed. Is static for all
@@ -21,12 +44,20 @@ class Diatheke {
      */
     protected static $isInstalled = false;
     
+    public function __construct(Configuration $config = NULL){
+        $this->config = $config;
+    }
+    
     /**
      * Creates a new instance of the QueryBuilder.
      * @return QueryBuilder 
      */
-    public function createQueryBuilder(){
-        return new QueryBuilder();
+    public function createQueryBuilder($empty = false){
+        if($empty){
+            return new QueryBuilder();
+        }else{
+            return new QueryBuilder($this->config);
+        }
     }
     
     /**
@@ -54,8 +85,8 @@ class Diatheke {
      * @param QueryBuilder $query 
      */
     public function execute(QueryBuilder $query){
-        echo $query->__toString();
-        system(escapeshellcmd($query));
+        $cmd = escapeshellcmd($query->__toString());
+        return `$cmd`;
     }
     
     /**
@@ -63,7 +94,7 @@ class Diatheke {
      * @return string 
      */
     public function getModules(){
-        $qb = $this->createQueryBuilder();
+        $qb = $this->createQueryBuilder(false);
         $qb->module('system')->query('modulelist');
         return $this->execute($qb);
     }
@@ -73,7 +104,7 @@ class Diatheke {
      * @return string 
      */
     public function getModuleList(){
-        $qb = $this->createQueryBuilder();
+        $qb = $this->createQueryBuilder(false);
         $qb->module('system')->query('modulelistnames');
         return $this->execute($qb);
     }
@@ -83,8 +114,14 @@ class Diatheke {
      * @return string 
      */
     public function getLocales(){
-        $qb = $this->createQueryBuilder();
+        $qb = $this->createQueryBuilder(false);
         $qb->module('system')->query('localelist');
         return $this->execute($qb);
+    }
+    
+    public function bibleText($reference){
+        $qb = $this->createQueryBuilder();
+        $qb->query($reference);
+        return OutputParser::parsePlainBibleText($this->execute($qb));
     }
 }
