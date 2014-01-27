@@ -27,7 +27,7 @@ return array(
     'Song' => array('Höga V', 'Höga Visan'),
     
     'Isa' => array('Jes', 'Jesaja'),
-    'Jer' => array('Jer', 'Jerimia'),
+    'Jer' => array('Jer', 'Jeremia'),
     'Lam' => array('Klag', 'Klagovisorna'),
     'Ezek' => array('Hes', 'Hesekiel'),
     'Dan' => array('Dan', 'Daniel'),
