@@ -1,0 +1,23 @@
+{
+    "name": "krillzip/diatheke",
+    "type": "library",
+    "description": "Krillzip/Diatheke is a php wrapper for the crosswire diatheke backend.",
+    "keywords": [ "bible", "diatheke" ],
+    "homepage": "https://github.com/krillzip/diatheke",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kristoffer Paulsson",
+            "email": "krillzip@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">5.3.2"        
+    },
+    "autoload": {
+        "psr-0": {
+            "Krillzip\\Diatheke": ""
+        }
+    },
+    "target-dir": "Krillzip/Diatheke"
+}
