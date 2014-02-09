@@ -70,7 +70,6 @@ class Diatheke {
         }
         
         exec('type diatheke', $output, $returnVal);
-        var_dump($output, $returnVal);
         if($returnVal === 0){
             self::$isInstalled = true;
             return true;
