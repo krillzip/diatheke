@@ -42,5 +42,33 @@ class OutputParser {
         preg_match_all('/([\S ]*) [0-9]*:[0-9]*:/', $output, $matches);
         return (isset($matches[1])) ? $matches[1] : null;
     }
+    
+    public static function parseModules($output){
+         $data = explode(PHP_EOL, $output);
+         $headline = null;
+         $structure = array();
+         foreach($data as $row){
+             if(strlen($row) == 0){
+                 continue;
+             }
+             if(preg_match('/^[\S ]*:$/', $row)){
+                 $headline = substr($row, 0, strlen($row)-1);
+                 $structure[$headline] = array();
+             }else{
+                 $split = explode(':', $row);
+                 if(is_null($headline)){
+                     $structure[trim($split[0])] = trim($split[1]);
+                 }else{
+                     $structure[$headline][trim($split[0])] = trim($split[1]);
+                 }
+             }
+         }
+         return $structure;
+    }
+    
+    public static function parseModuleList($output){
+         $data = explode(PHP_EOL, $output);
+         return array_filter($data);
+    }
 
 }
