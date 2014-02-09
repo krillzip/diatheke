@@ -69,12 +69,12 @@ class Diatheke {
             return true; 
         }
         
-        $output = exec('type -P diatheke');
-        if(preg_match('/(diatheke)/', $output) === 1){
+        exec('type diatheke', $output, $returnVal);
+        var_dump($output, $returnVal);
+        if($returnVal === 0){
             self::$isInstalled = true;
             return true;
         }else{
-            throw new Exception\NotInstalledException();
             return false;
         }
                 
