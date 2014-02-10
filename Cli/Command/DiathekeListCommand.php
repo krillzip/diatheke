@@ -42,7 +42,7 @@ EOT
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $d = new Diatheke();
+        $d = $this->getHelper('diatheke')->get();
         $r = $input->getOption('raw');
         $l = $input->getOption('long');
 

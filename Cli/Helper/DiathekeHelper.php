@@ -18,17 +18,14 @@ class DiathekeHelper extends Helper{
     
     protected static $diatheke;
     
-    public function __construct(){
-        if(!self::$diatheke){
-            self::$diatheke = new Diatheke();
-        }
-    }
-    
     public function getName(){
         return 'diatheke';
     }
     
     public function get(){
+        if(!self::$diatheke){
+            self::$diatheke = new Diatheke();
+        }
         return self::$diatheke;
     }
 }

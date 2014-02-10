@@ -36,7 +36,7 @@ EOT
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $d = new Diatheke();
+        $d = $this->getHelper('diatheke')->get();
         $this->output = $output;
         
         $output->writeln('<info>Starting diagnosis...</info>');
