@@ -22,5 +22,6 @@
             "Krillzip\\Diatheke": ""
         }
     },
-    "target-dir": "Krillzip/Diatheke"
+    "target-dir": "Krillzip/Diatheke",
+    "bin": ["bin/diatheke"]
 }
