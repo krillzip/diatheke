@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace Krillzip\Diatheke\Command;
+namespace Krillzip\Diatheke\Cli\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

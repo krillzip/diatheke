@@ -22,7 +22,7 @@ class Configuration implements \ArrayAccess {
     protected static $outputEncoding = array('Latin1', 'UTF8', 'UTF16', 'HTML',
         'RTF');
     protected static $keys = array('module', 'search', 'range', 'filter',
-        'limit', 'output', 'encoding', 'script', 'variant', 'locale');
+        'limit', 'output', 'format', 'encoding', 'script', 'variant', 'locale');
     protected $options;
 
     public function __construct(array $config = array()) {
@@ -82,6 +82,22 @@ class Configuration implements \ArrayAccess {
         }
 
         return true;
+    }
+    
+    public static function getSearchType(){
+        return self::$searchType;
+    }
+    
+    public static function getOptionFilters(){
+        return self::$optionFilters;
+    }
+    
+    public static function getOutputFormats(){
+        return self::$outputFormat;
+    }
+    
+    public static function getOutputEncodings(){
+        return self::$outputEncoding;
     }
 
     public function toArray() {

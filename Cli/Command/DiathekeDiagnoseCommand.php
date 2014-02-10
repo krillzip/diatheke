@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Krillzip\Diatheke\Command;
+namespace Krillzip\Diatheke\Cli\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,6 +23,7 @@ class DiathekeDiagnoseCommand extends Command {
     protected $output = null;
     
     protected function configure() {
+        parent::configure();
         $this
                 ->setName('diatheke:diagnose')
                 ->setDescription('Diagnosing the diatheke install')

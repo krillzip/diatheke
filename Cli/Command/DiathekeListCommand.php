@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Krillzip\Diatheke\Command;
+namespace Krillzip\Diatheke\Cli\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,6 +25,7 @@ use Krillzip\Diatheke\Configuration;
 class DiathekeListCommand extends Command {
 
     protected function configure() {
+        parent::configure();
         $this
                 ->setName('diatheke:list')
                 ->setDescription('Lists installed diatheke modules')
