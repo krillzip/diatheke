@@ -1,8 +1,0 @@
-#!/usr/bin/php
-<?php
-require __DIR__ . '/vendor/autoload.php';
-
-$shell = new Symfony\Component\Console\Shell(
-        new \Krillzip\Diatheke\Cli\Application()
-);
-$shell->run();
