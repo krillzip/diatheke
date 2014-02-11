@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * (c) Kristoffer Paulsson <krillzip@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return array(
     'Gen' => array('1 Mos', 'Första Moseboken'),
     'Exod' => array('2 Mos', 'Andra Moseboken'),
