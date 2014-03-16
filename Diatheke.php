@@ -9,6 +9,8 @@
 
 namespace Krillzip\Diatheke;
 
+use Krillzip\Diatheke\Exception\DiathekeException;
+
 /**
  * Diatheke is the main class in the library.
  * 
@@ -47,6 +49,12 @@ class Diatheke {
     protected static $isInstalled = false;
     
     public function __construct(Configuration $config = NULL){
+        if(!is_null($config)){
+            $this->configure($config);
+        }
+    }
+    
+    public function configure(Configuration $config){
         $this->config = $config;
     }
     
@@ -54,11 +62,14 @@ class Diatheke {
      * Creates a new instance of the QueryBuilder.
      * @return QueryBuilder 
      */
-    public function createQueryBuilder($empty = false){
-        if($empty){
-            return new QueryBuilder();
-        }else{
+    public function createQueryBuilder($createFromConfig = false){
+        if($createFromConfig){
+            if(!is_a($this->config, 'Krillzip\\Diatheke\\Configuration')){
+                throw new DiathekeException('Failed to create Querybuilder from no Configuration');
+            }
             return new QueryBuilder($this->config);
+        }else{
+            return new QueryBuilder();
         }
     }
     
@@ -95,7 +106,7 @@ class Diatheke {
      * @return string 
      */
     public function getModules(){
-        $qb = $this->createQueryBuilder(false);
+        $qb = $this->createQueryBuilder();
         $qb->module('system')->query('modulelist');
         return $this->execute($qb);
     }
@@ -105,7 +116,7 @@ class Diatheke {
      * @return string 
      */
     public function getModuleList(){
-        $qb = $this->createQueryBuilder(false);
+        $qb = $this->createQueryBuilder();
         $qb->module('system')->query('modulelistnames');
         return $this->execute($qb);
     }
@@ -115,14 +126,17 @@ class Diatheke {
      * @return string 
      */
     public function getLocales(){
-        $qb = $this->createQueryBuilder(false);
+        $qb = $this->createQueryBuilder();
         $qb->module('system')->query('localelist');
         return $this->execute($qb);
     }
     
     public function bibleText($reference){
-        $qb = $this->createQueryBuilder();
+        $qb = $this->createQueryBuilder(true);
         $qb->query($reference);
+        
+        $qb->reset('s');
+        
         return OutputParser::parsePlainBibleText($this->execute($qb));
     }
     

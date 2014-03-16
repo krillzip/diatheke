@@ -20,6 +20,7 @@ use Symfony\Component\Console\Helper\Helper;
 class DiathekeHelper extends Helper{
     
     protected static $diatheke;
+    protected static $message = null;
     
     public function getName(){
         return 'diatheke';
@@ -30,5 +31,15 @@ class DiathekeHelper extends Helper{
             self::$diatheke = new Diatheke();
         }
         return self::$diatheke;
+    }
+    
+    public function sendMessage($m){
+        self::$message = $m;
+    }
+    
+    public function receiveMessage(){
+        $m = self::$message;
+        self::$message = null;
+        return $m;
     }
 }

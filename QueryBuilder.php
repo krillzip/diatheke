@@ -20,52 +20,56 @@ class QueryBuilder {
     protected $firstOption;
     protected $lastOption;
     protected $searchType = array('regex', 'multiword', 'phrase');
-    protected $optionFilters = array('n', 'f', 'm', 'h', 'c', 'v', 'a', 'p',
-        'l', 's', 'r', 'b', 'x');
+    protected $optionFilters = array(
+        'n', 'f', 'm', 'h',
+        'c', 'v', 'a', 'p',
+        'l', 's', 'r', 'b',
+        'x'
+    );
     protected $outputFormat = array('GBF', 'ThML', 'RTF', 'HTML', 'OSIS', 'CGI', 'plain');
     protected $outputEncoding = array('Latin1', 'UTF8', 'UTF16', 'HTML', 'RTF');
 
     public function __construct(Configuration $config = NULL) {
-        if($config !== NULL){
+        if ($config !== NULL) {
             $config = $config->toArray();
-            
-            if(isset($config['module'])){
+
+            if (isset($config['module'])) {
                 $this->module($config['module']);
             }
-            
-            if(isset($config['search'])){
+
+            if (isset($config['search'])) {
                 $this->search($config['search']);
             }
-            
-            if(isset($config['range'])){
+
+            if (isset($config['range'])) {
                 $this->range($config['range']);
             }
-            
-            if(isset($config['filter'])){
+
+            if (isset($config['filter'])) {
                 $this->filter($config['filter']);
             }
-            
-            if(isset($config['limit'])){
+
+            if (isset($config['limit'])) {
                 $this->limit($config['limit']);
             }
-            
-            if(isset($config['output'])){
+
+            if (isset($config['output'])) {
                 $this->output($config['output']);
             }
-            
-            if(isset($config['encoding'])){
+
+            if (isset($config['encoding'])) {
                 $this->encoding($config['encoding']);
             }
-            
-            if(isset($config['script'])){
+
+            if (isset($config['script'])) {
                 $this->script($config['script']);
             }
-            
-            if(isset($config['variant'])){
+
+            if (isset($config['variant'])) {
                 $this->variant($config['variant']);
             }
-            
-            if(isset($config['locale'])){
+
+            if (isset($config['locale'])) {
                 $this->locale($config['locale']);
             }
         }
@@ -174,12 +178,24 @@ class QueryBuilder {
         return $this;
     }
 
+    public function reset($options) {
+        if (is_string($options)) {
+            $opts = explode(',', $options);
+            foreach ($opts as $option) {
+                $option = trim($option);
+                if (isset($this->options[$option])) {
+                    unset($this->options[$option]);
+                }
+            }
+        }
+    }
+
     public function __toString() {
         if (!isset($this->firstOption)) {
-            trigger_error('Module must be set in QueryBuilder!');
+            trigger_error('Module must be set in QueryBuilder!', E_USER_ERROR);
         }
         if (!isset($this->lastOption)) {
-            trigger_error('Query must be set in QueryBuilder!');
+            trigger_error('Query must be set in QueryBuilder!', E_USER_ERROR);
         }
         return
                 'diatheke ' .

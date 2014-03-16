@@ -102,13 +102,9 @@ EOT
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
-        $o = 'php://stdout';
         $c = new Configuration($this->config);
         
-        $e = $input->getOption('export');
-        $o = empty($e) ? $o : $e;
-        $s = new StreamOutput(fopen($o));
-        $s->write(json_encode($c->toArray()));
+        $this->getHelper('diatheke')->sendMessage($c->toArray());
     }
 
 }

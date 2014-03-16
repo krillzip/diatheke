@@ -19,4 +19,5 @@ class Exception extends \Exception{
     const QUERY_BUILDER = 2;
     const REFERENCE_ERROR = 3;
     const CONFIGURATION_ERROR = 4;
+    const DIATHEKE_ERROR = 5;
 }
