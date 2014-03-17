@@ -141,8 +141,12 @@ class Diatheke {
     }
     
     public function bibleBook($reference){
-        $qb = $this->createQueryBuilder();
+        $qb = $this->createQueryBuilder(true);
+        $qb->limit(1);
         $qb->query($reference);
+        
+        $qb->reset('s');
+        
         return OutputParser::parsePlainBibleBook($this->execute($qb));
     }
 }

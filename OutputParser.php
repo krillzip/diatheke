@@ -41,7 +41,7 @@ class OutputParser {
     
     public static function parsePlainBibleBook($output){
         $matches = array();
-        preg_match_all('/([\S ]*) [0-9]*:[0-9]*:/', $output, $matches);
+        preg_match('/([\S ]*) [0-9]*:[0-9]*:/', $output, $matches);
         return (isset($matches[1])) ? $matches[1] : null;
     }
     
