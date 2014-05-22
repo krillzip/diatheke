@@ -40,7 +40,7 @@ class Configuration implements \ArrayAccess {
         }
 
         if (isset($config['filter'])) {
-            self::validateOptionFilters($config['search']);
+            self::validateOptionFilters($config['filter']);
         }
 
         if (isset($config['format'])) {

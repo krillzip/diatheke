@@ -23,16 +23,24 @@ use Krillzip\Diatheke\Configuration;
  * @author krillzip
  */
 class TestCommand extends Command {
+    
+    protected function configure() {
+        parent::configure();
+        $this
+                ->setName('diatheke:test')
+        ;
+    }
 
     public function execute(InputInterface $input, OutputInterface $output) {
         $factory = new Diatheke(new Configuration(array(
-            'module' => 'SweFolk1998',
+            'module' => 'KJV',
             'output' => Diatheke::FORMAT_PLAIN,
+            'filter' => 'n',
             'encoding' => Diatheke::ENCODING_UTF8,
-            'locale' => 'sv',
+            'locale' => 'en',
         )));
         
-        var_dump($factory->bibleText('Ps 23'));
+        var_dump($factory->bibleText('Gen 1'));
         
     }
 
